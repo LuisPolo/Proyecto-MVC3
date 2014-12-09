@@ -13,6 +13,11 @@ namespace OdeTofood.Controllers
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
+           ViewBag.Message = string.Format("{0}::{1}{2}",                
+                RouteData.Values["controller"],                
+                RouteData.Values["action"],
+                RouteData.Values["id"]);
+
             var model = new RestaurantReview();
             model.Name = "Long Horn";
             model.Rating = 9;
