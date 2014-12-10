@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+
 
 namespace OdeTofood.Models
 {
     public class FoodDb
     {
 
+      
         public List<RestaurantReview> Reviews
         {
             get
@@ -22,9 +25,13 @@ namespace OdeTofood.Models
 
         static List<RestaurantReview> _reviews;
 
+       
+
         static FoodDb()
         {
             _reviews = new List<RestaurantReview>();
+
+            var ruta = HttpContext.Current.Server.MapPath(".");
 
             _reviews.Add(new RestaurantReview
                 {
@@ -34,9 +41,12 @@ namespace OdeTofood.Models
                     Rating = 9,
                     Restaurant = new Restaurant
                     {
-                        Name = "Mannequin Pis"
+                        Name = "Mannequin Pis"  ,
+                        ImageUrl = "http://localhost:27788/Images/luffyeating.jpg"
                     }
                 });
+
+           
 
             _reviews.Add(new RestaurantReview
             {
@@ -46,7 +56,9 @@ namespace OdeTofood.Models
                 Rating = 2,
                 Restaurant = new Restaurant
                 {
-                    Name = "Mis costillitas"
+                    Name = "Mis costillitas",
+                   ImageUrl = "http://localhost:27788/Images/luffyeating.jpg"
+                    
                 }
             });
 
@@ -58,7 +70,9 @@ namespace OdeTofood.Models
                 Rating = 15,
                 Restaurant = new Restaurant
                 {
-                    Name = "Pasion Italiana"
+                    Name = "Pasion Italiana",
+                    ImageUrl = "http://localhost:27788/Images/luffyeating.jpg"
+                    
                 }
             });
         

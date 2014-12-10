@@ -50,7 +50,6 @@ namespace OdeTofood
                 "Default", // Route name
                 "{controller}/{action}/{id}",//Url with parameters
                 new { controller = "home", action = "index", id = UrlParameter.Optional }
-
                 );
         
         }

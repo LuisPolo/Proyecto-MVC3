@@ -21,6 +21,8 @@ namespace OdeTofood.Controllers
         public ActionResult Search(string name = "*") 
         {
 
+            var ruta = Server.MapPath("~/Content/Site.css");
+
             throw new Exception("oops i fucked!");
 
           /*  if (name == "*")
@@ -30,17 +32,20 @@ namespace OdeTofood.Controllers
 
                 //se puede redireccionar a una ruta determinada
                     //return RedirectToRoute("cuisine", new { name = "german" });
-
+            
                 //puedo redireccionar inclusive archivos
                     //return File(Server.MapPath("~/Content/Site.css"), "text/css");
 
                 //puedo retornar un resultadi de tipo json. Jvscript serialize in json 
                 return Json(new { cuisineName = name }, JsonRequestBehavior.AllowGet);
             }*/
+                     
+
              name = Server.HtmlEncode(name);
             
             // return RedirectToAction("Index", "Home"); // Redirecciona a la accion index del controlador Home
 
+            
             return Content(name);
         }
 

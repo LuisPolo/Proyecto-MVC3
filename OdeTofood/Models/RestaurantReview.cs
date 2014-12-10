@@ -19,5 +19,7 @@ namespace OdeTofood.Models
 
         public Restaurant Restaurant { get; set; }
 
+        
+
     }
 }

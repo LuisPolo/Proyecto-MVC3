@@ -20,7 +20,18 @@ namespace OdeTofood.Controllers
 
             var model = _db.Reviews;
 
+           
             return View(model);
+        }
+
+        [ChildActionOnly] //Solo que sea llamado por el hijo. asi sepa la ruta no lo va a llamar
+        public ActionResult BestReview()
+        {
+
+            var model = _db.Reviews.Find(x=>x.Id==1);
+
+            
+            return PartialView("_Review" ,model);
         }
 
         //
@@ -62,7 +73,10 @@ namespace OdeTofood.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            
+            var review = _db.Reviews.Find(x => x.Id == id);
+
+            return View(review);
         }
 
         //
@@ -71,16 +85,20 @@ namespace OdeTofood.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add update logic here
+             // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                var review = _db.Reviews.Find(x => x.Id == id);
+
+                //Look for values in the request that can be moved to
+                //a particular model object. If review has a body
+                //is gonna look out sowhere. Trata de llenar el modelo 
+                //con valores del request
+
+               if(TryUpdateModel(review))
+                    return RedirectToAction("Index");
+
+               return View(review);
+           
         }
 
         //

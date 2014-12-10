@@ -23,6 +23,7 @@
                             <li>@Html.ActionLink("Home", "Index", "Home")</li> <!-- nombre del link, action, controller -->
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
                         </ul>
                     </nav>
                 </div>
@@ -31,7 +32,18 @@
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
+                @RenderBody()<!--Aca es donde se va a cargar el cuerpo de las demas paginas-->
+                
+               @* Este metodo html me permite cargar un partial view de diferentes controladores
+                Esta pagina es el layaout y puedo llamar a un controlador diferente*@
+                @Html.Action("BestReview", "Reviews")
+                
+                
+                @RenderSection("Footer", false)
+                @*//Provee al content view la habilidad 
+                //de plug in content into another location inside of thw layoutview
+                La seccion footer esta en E:\PROYECTOS\Proyecto-MVC3\OdeTofood\Views\Reviews\Index.cshtml
+                *@
             </section>
         </div>
         <footer>

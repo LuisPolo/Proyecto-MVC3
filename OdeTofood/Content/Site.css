@@ -1,4 +1,10 @@
-﻿html {
+﻿    /*alinecion*/
+
+right {
+     padding-left:50%;
+}
+
+html {
     background-color: #e2e2e2;
     margin: 0;
     padding: 0;
