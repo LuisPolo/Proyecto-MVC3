@@ -36,7 +36,9 @@
                 
                @* Este metodo html me permite cargar un partial view de diferentes controladores
                 Esta pagina es el layaout y puedo llamar a un controlador diferente*@
-                @Html.Action("BestReview", "Reviews")
+                
+                @*Se comento para poder realizar la parte con entity framework*@
+                @*@Html.Action("BestReview", "Reviews")*@
                 
                 
                 @RenderSection("Footer", false)

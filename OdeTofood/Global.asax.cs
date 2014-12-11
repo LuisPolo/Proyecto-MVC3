@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using OdeTofood.Infraestructure;
+using System.Data.Entity;
+using OdeTofood.Models;
 
 namespace OdeTofood
 {
@@ -15,19 +17,7 @@ namespace OdeTofood
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
-
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            //Global rpute collection
-            //RouteConfig.RegisterRoutes(RouteTable.Routes);
-            RegisterGlobalFilters(GlobalFilters.Filters);
-            RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterAuth();
-        }
+        
 
         private static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
@@ -49,9 +39,85 @@ namespace OdeTofood
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}",//Url with parameters
-                new { controller = "home", action = "index", id = UrlParameter.Optional }
+                new { controller = "restaurant", action = "index", id = UrlParameter.Optional }
                 );
         
+        }
+
+        protected void Application_Start()
+        {
+
+            //Database.SetInitializer(new 
+            //    DropCreateDatabaseIfModelChanges<OdeToFoodDB>());
+
+            Database.SetInitializer(new
+                OdeToFoodDBInitializer());
+
+            AreaRegistration.RegisterAllAreas();
+
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
+            //Global rpute collection
+            //RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            RegisterGlobalFilters(GlobalFilters.Filters);
+            RegisterRoutes(RouteTable.Routes);
+
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //AuthConfig.RegisterAuth();
+        }              
+    }
+
+    public class OdeToFoodDBInitializer : 
+        DropCreateDatabaseIfModelChanges<OdeToFoodDB>
+    {
+
+        protected override void Seed(OdeToFoodDB context)
+        {
+
+            base.Seed(context);
+
+            context.Restaurants.Add(
+                new Restaurant
+                {
+                    Name = "Mis Costillitas",
+                    Adress = new Adress
+                    {
+                        City = "Lima",
+                        State = "Peru"
+                    }
+
+                }
+            );
+
+            context.Restaurants.Add(
+                new Restaurant
+                {
+                    Name = "Antica",
+                    Adress = new Adress
+                    {
+                        City = "SAn isidro",
+                        State = "Peru"
+                    }
+
+                }
+            );
+
+            context.Restaurants.Add(
+                new Restaurant
+                {
+                    Name = "Rustica",
+                    Adress = new Adress
+                    {
+                        City = "San Borja",
+                        State = "Peru"
+                    }
+
+                }
+            );
+
+            context.SaveChanges();
         }
     }
 }

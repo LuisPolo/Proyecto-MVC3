@@ -11,14 +11,32 @@ namespace OdeTofood.Controllers
     {
         public ViewResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
+            //En caso de borrar la base de datos al agregar algo al contexto, se genera nuevamente
+
+            //OdeToFoodDB context = new OdeToFoodDB();
+
+            //context.Restaurants.Add(new Restaurant
+            //{
+            //    Name = "Mis Costillitas"
+            //});
+           
+         //UsersContext context2 = new UsersContext();
+
+         //   context2.UserProfiles.Add(new UserProfile
+         //   {
+         //       UserName="Luis"
+         //   });
+
+
+            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            
            ViewBag.Message = string.Format("{0}::{1}{2}",                
                 RouteData.Values["controller"],                
                 RouteData.Values["action"],
                 RouteData.Values["id"]);
 
-            var model = new RestaurantReview();
+            var model = new Review();
             model.Name = "Long Horn";
             model.Rating = 9;
 

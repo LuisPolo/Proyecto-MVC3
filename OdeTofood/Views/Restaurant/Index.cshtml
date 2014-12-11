@@ -1,0 +1,55 @@
+﻿@model IEnumerable<OdeTofood.Models.Restaurant>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@*Por defecto me crea un form con metodo post para que los parametros no viaje por la url
+Esto para el ejemplo se puede cambiar*@
+@using(Html.BeginForm("Index", "Restaurant", FormMethod.Get))
+{
+    @* Se pone el nombre de la variable a pasar por postback*@
+    @Html.DropDownList("city", new SelectList(ViewBag.States))
+    <input type="submit" value="Filter"/>
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adress.City)
+            @Html.DisplayFor(modelItem => item.Adress.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageUrl)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.ActionLink("show restaurants in Lima", "Index", "Restaurant", new { city="Lima"}, null)

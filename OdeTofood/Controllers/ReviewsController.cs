@@ -10,7 +10,7 @@ namespace OdeTofood.Controllers
     public class ReviewsController : Controller
     {
 
-        FoodDb _db = new FoodDb();
+        OdeToFoodDB _db = new OdeToFoodDB();
 
         //
         // GET: /Reviews/
@@ -27,10 +27,11 @@ namespace OdeTofood.Controllers
         [ChildActionOnly] //Solo que sea llamado por el hijo. asi sepa la ruta no lo va a llamar
         public ActionResult BestReview()
         {
+            ////Se comenta ya que no tiene Reviews en List, en duro
+            //var model = _db.Reviews.Find(x => x.Id == 1);
 
-            var model = _db.Reviews.Find(x=>x.Id==1);
+            var model = _db.Reviews.Find(1);
 
-            
             return PartialView("_Review" ,model);
         }
 
@@ -73,10 +74,13 @@ namespace OdeTofood.Controllers
 
         public ActionResult Edit(int id)
         {
-            
-            var review = _db.Reviews.Find(x => x.Id == id);
+            ////Se comenta ya que no tiene Reviews en List, en duro
+            //var Review = _db.Reviews.Find(x => x.Id == id);
 
-            return View(review);
+            //Ahora es DbSet
+            var Review = _db.Reviews.Find(id);
+
+            return View(Review);
         }
 
         //
@@ -86,18 +90,20 @@ namespace OdeTofood.Controllers
         public ActionResult Edit(int id, FormCollection collection)
         {
              // TODO: Add update logic here
+            ////Se comenta ya que no tiene Reviews en List, en duro
+            //var Review = _db.Reviews.Find(x => x.Id == id);
 
-                var review = _db.Reviews.Find(x => x.Id == id);
+                var Review = _db.Reviews.Find(id);
 
                 //Look for values in the request that can be moved to
-                //a particular model object. If review has a body
+                //a particular model object. If Review has a body
                 //is gonna look out sowhere. Trata de llenar el modelo 
                 //con valores del request
 
-               if(TryUpdateModel(review))
+               if(TryUpdateModel(Review))
                     return RedirectToAction("Index");
 
-               return View(review);
+               return View(Review);
            
         }
 
